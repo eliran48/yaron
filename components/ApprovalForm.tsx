@@ -1,78 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const ApprovalForm: React.FC = () => {
-  const [approvalDate, setApprovalDate] = useState('');
-  const [clientName, setClientName] = useState('');
-  const [clientEmail, setClientEmail] = useState('');
-
-  useEffect(() => {
-    const getFormattedDate = () => {
-      const today = new Date();
-      const dd = String(today.getDate()).padStart(2, '0');
-      const mm = String(today.getMonth() + 1).padStart(2, '0');
-      const yyyy = today.getFullYear();
-      return `${dd}/${mm}/${yyyy}`;
-    };
-    setApprovalDate(getFormattedDate());
-  }, []);
-
   return (
-    <section id="approval" className="bg-brand-blue text-white p-6 md:p-10 rounded-lg mt-8">
-      <h2 className="text-white border-b-brand-lightblue mt-0 text-2xl md:text-3xl font-bold border-b-2 pb-2 mb-5">✅ אישור ההצעה והתחלת העבודה</h2>
-      <p>מוכן להתחיל? אנא מלא את הפרטים מטה לאישור ההצעה ותחילת הפרויקט.</p>
-      
-      <form 
-        action="https://formspree.io/f/xanawgvd" 
-        method="POST" 
-        className="mt-6 space-y-5"
-      >
-        <input type="hidden" name="_subject" value="אישור הצעת מחיר - ירון ויסברג - הקמת CRM ואוטומציה" />
-
-        <div>
-          <label htmlFor="clientName" className="block font-semibold mb-2">שם מלא (הקלדת שמך מהווה חתימה)</label>
-          <input 
-            type="text" 
-            id="clientName" 
-            name="signature" 
-            placeholder="ירון ויסברג" 
-            required 
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-md text-gray-800 focus:ring-2 focus:ring-brand-lightblue focus:border-transparent"
-          />
+    <section className="mt-12 pt-8 border-t-2 border-gray-200">
+      <h2 className="text-2xl font-bold text-brand-blue mb-4 text-center">אישור הצעת מחיר</h2>
+      <p className="text-center text-gray-600 mb-6">
+        אני מאשר את תנאי ההצעה ומעוניין להתחיל בתהליך.
+      </p>
+      <form className="max-w-md mx-auto">
+        <div className="mb-4">
+          <label htmlFor="fullName" className="block text-gray-700 font-semibold mb-2">שם מלא</label>
+          <input type="text" id="fullName" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue" />
         </div>
-
-        <div>
-          <label htmlFor="clientEmail" className="block font-semibold mb-2">דוא"ל (לקבלת עותק מהאישור)</label>
-          <input 
-            type="email" 
-            id="clientEmail" 
-            name="email" 
-            placeholder="email@example.com" 
-            required 
-            value={clientEmail}
-            onChange={(e) => setClientEmail(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-md text-gray-800 focus:ring-2 focus:ring-brand-lightblue focus:border-transparent"
-          />
+        <div className="mb-4">
+          <label htmlFor="date" className="block text-gray-700 font-semibold mb-2">תאריך</label>
+          <input type="date" id="date" defaultValue={new Date().toISOString().substring(0, 10)} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue" />
         </div>
-
-        <div>
-          <label htmlFor="approvalDate" className="block font-semibold mb-2">תאריך אישור</label>
-          <input 
-            type="text" 
-            id="approvalDate" 
-            name="date" 
-            value={approvalDate} 
-            readOnly 
-            className="w-full p-3 border border-gray-300 rounded-md bg-gray-200 cursor-not-allowed text-gray-600"
-          />
+        <div className="mb-6">
+          <label htmlFor="signature" className="block text-gray-700 font-semibold mb-2">חתימה</label>
+          <div className="w-full h-32 bg-gray-100 border border-dashed border-gray-400 rounded-lg flex items-center justify-center">
+            <span className="text-gray-500">יש לחתום כאן</span>
+          </div>
         </div>
-
-        <button 
-          type="submit" 
-          className="w-full bg-brand-lightblue text-brand-blue text-xl font-bold py-4 px-6 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-brand-blue hover:translate-y-[-2px] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-blue focus:ring-white"
-        >
-          אני מאשר ורוצה להתחיל!
+        <button type="submit" className="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors text-lg">
+          אישור ושליחה
         </button>
       </form>
     </section>

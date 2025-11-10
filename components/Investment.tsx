@@ -5,28 +5,28 @@ interface InvestmentProps {
 }
 
 const Investment: React.FC<InvestmentProps> = ({ totalPrice }) => {
+  const vat = totalPrice * 0.17;
+  const totalWithVat = totalPrice + vat;
 
   return (
-    <section id="investment">
-      <h2 className="text-2xl md:text-3xl font-bold border-b-2 border-brand-lightblue pb-2 mt-8 mb-5 text-brand-blue">💰 ההשקעה ולוחות זמנים</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-gray-50 p-5 rounded-lg">
-        <div className="box p-5 rounded-lg bg-white border border-gray-200 text-center">
-          <h3 className="mt-0 text-xl font-bold text-brand-blue">השקעה בפרויקט</h3>
-          <div className="price text-5xl font-bold text-brand-blue my-2">{totalPrice.toLocaleString()} ₪</div>
-          <div className="vat-details text-sm text-gray-600">
-            <strong className="text-base">בתוספת מע"מ</strong>
-          </div>
+    <section className="mb-10">
+      <h2 className="text-2xl font-bold text-brand-blue mb-4">השקעה</h2>
+      <div className="bg-blue-50 border-l-4 border-brand-blue p-6 rounded-lg">
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-gray-700">סה"כ לתשלום (לפני מע"מ):</span>
+          <span className="font-bold text-lg text-gray-900">₪{totalPrice.toLocaleString()}</span>
         </div>
-        <div className="box p-5 rounded-lg bg-white border border-gray-200 text-center flex flex-col justify-center">
-          <h3 className="mt-0 text-xl font-bold text-brand-blue">משך הפרויקט</h3>
-          <div className="price text-5xl font-bold text-brand-blue my-2">עד 30</div>
-          <div className="vat-details text-base text-gray-600">
-            ימי עסקים
-            <br />
-            מרגע קבלת כלל החומרים והגישות.
-          </div>
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-gray-700">מע"מ (17%):</span>
+          <span className="font-bold text-lg text-gray-900">₪{vat.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+        </div>
+        <div className="border-t border-gray-300 my-2"></div>
+        <div className="flex justify-between items-center font-bold text-xl text-brand-blue">
+          <span>סה"כ לתשלום (כולל מע"מ):</span>
+          <span>₪{totalWithVat.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
         </div>
       </div>
+      <p className="text-sm text-gray-600 mt-4">*התשלום יתבצע בהעברה בנקאית או באשראי (ניתן לחלק לתשלומים).</p>
     </section>
   );
 };
