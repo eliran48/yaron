@@ -1,0 +1,5 @@
+{
+  "name": "Interactive Price Quote",
+  "description": "An interactive price quote application built with React and Tailwind CSS, based on a provided HTML template. It allows users to select services and see the total price update dynamically.",
+  "requestFramePermissions": []
+}
